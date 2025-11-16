@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Reconnect</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+<nav>
+    <h1>Campus Reconnect</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/match">Match</a></li>
+        <li><a href="/post/create">Post Item</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <h2>Welcome to Campus Reconnect</h2>
+    <p>Find or post lost & found items on campus.</p>
+    <div class="cta-btns">
+        <a href="#feed">Feed</a>
+        <a href="/match">Match</a>
+        <a href="/post/create">Post Item</a>
+    </div>
+</section>
+
+<section class="features-container" id="feed"></section>
+
+<div id="loader" style="text-align:center; padding: 20px; display:none;">
+    Loading posts...
+</div>
+
+<!-- ⭐ How It Works -->
+<section style="background:#ffffff; padding:40px; margin-top:30px; border-radius:10px;">
+    <h2 style="text-align:center; color:#1877f2;">How It Works</h2>
+    <div style="display:flex; justify-content:space-around; margin-top:25px;">
+
+        <div style="width:22%; text-align:center;">
+            <span style="font-size:40px;">📌</span>
+            <h3>Post Lost Item</h3>
+            <p>Share details about what you lost on campus.</p>
+        </div>
+
+        <div style="width:22%; text-align:center;">
+            <span style="font-size:40px;">🧭</span>
+            <h3>We Match It</h3>
+            <p>Our system automatically finds best match posts.</p>
+        </div>
+
+        <div style="width:22%; text-align:center;">
+            <span style="font-size:40px;">📬</span>
+            <h3>Connect Securely</h3>
+            <p>Chat anonymously until your item is returned.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ⭐ Testimonials -->
+<section style="padding:40px;">
+    <h2 style="text-align:center; color:#1877f2;">What Students Say</h2>
+
+    <div style="display:flex; justify-content:center; gap:25px; margin-top:25px;">
+
+        <div style="background:white; width:28%; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            <p>"I found my lost laptop charger within 2 days! Amazing platform 🙌"</p>
+            <strong>— Priya, CSE</strong>
+        </div>
+
+        <div style="background:white; width:28%; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            <p>"Super simple UI, and very helpful for hostel students!"</p>
+            <strong>— Arjun, ECE</strong>
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+    let page = 0;
+    const size = 6;
+    let loading = false;
+    let lastPage = false;
+
+    function loadPosts() {
+        if (loading || lastPage) return;
+        loading = true;
+        document.getElementById("loader").style.display = "block";
+
+        fetch(`/api/feed?page=${page}&size=${size}`)
+            .then(res => res.json())
+            .then(data => {
+                const feed = document.getElementById("feed");
+
+                data.content.forEach(post => {
+                    const card = document.createElement("div");
+                    card.className = "feature-card";
+                    card.innerHTML = `
+                        <h3>${post.title}</h3>
+                        <p>${post.description || post.postDesc}</p>
+                        <small>Type: ${post.type}</small><br>
+                        <small>By: ${post.username}</small>
+                    `;
+                    feed.appendChild(card);
+                });
+
+                if (data.last) {
+                    lastPage = true;
+                    document.getElementById("loader").innerText = "No more posts";
+                } else {
+                    page++;
+                    document.getElementById("loader").style.display = "none";
+                }
+
+                loading = false;
+            })
+            .catch(() => {
+                loading = false;
+                document.getElementById("loader").style.display = "none";
+            });
+    }
+
+    loadPosts();
+
+    window.onscroll = function () {
+        if (!lastPage && window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+            loadPosts();
+        }
+    };
+</script>
+
+</body>
+</html>

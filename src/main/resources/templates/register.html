@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup page</title>
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
+
+</head>
+
+<body>
+<div class="brand-name">
+    <span class="brand-campus">Campus</span>
+    <span class="brand-reconnect">Reconnect</span>
+    <span class="slogan"></span>
+</div>
+
+<div class="Signup-container">
+    <h2>Create Account</h2>
+    <form th:action="@{/register}" method="post" th:object="${user}">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" th:field="*{username}" placeholder="Enter username" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" th:field="*{email}" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" th:field="*{password}" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit">Signup</button>
+
+        <div class="login-section">
+            <p>Already have an account?</p>
+            <button type="button" class="login-btn" onclick="window.location.href='/login'">Login</button>
+        </div>
+    </form>
+
+</div>
+
+<script th:src="@{/js/signup.js}"></script>
+</body>
+
+</html>

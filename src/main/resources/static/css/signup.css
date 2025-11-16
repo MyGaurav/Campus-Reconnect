@@ -1,0 +1,186 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+
+body {
+  background: linear-gradient(135deg, #6c63ff, #00b4d8);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+
+.brand-name {
+  position: absolute;
+  top: 25px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.brand-name .brand-campus {
+  font-weight: 800;
+  font-size: 26px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.brand-name .brand-reconnect {
+  font-weight: 700;
+  font-size: 22px;
+  color: #e0e7ff;
+  letter-spacing: 2px;
+}
+
+
+.slogan {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #dbeafe;
+  margin-top: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #dbeafe;
+  width: max-content;
+  animation: blinkCursor 0.8s steps(2) infinite;
+}
+
+
+@keyframes blinkCursor {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #dbeafe; }
+}
+
+
+.Signup-container {
+  background: #ffffff;
+  padding: 45px 55px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 380px;
+  animation: slideUp 0.9s ease-in-out;
+}
+
+.Signup-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.form-group input:focus {
+  border-color: #6c63ff;
+  outline: none;
+  box-shadow: 0 0 6px rgba(108, 99, 255, 0.4);
+}
+
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #6c63ff, #00b4d8);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(90deg, #5b56e0, #0096c7);
+}
+
+
+.login-section {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.login-section p {
+  color: #444;
+  font-size: 15px;
+}
+
+.login-btn {
+  display: inline-block;
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e5e5e5;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #936a6a;
+}
+
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

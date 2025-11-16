@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Reconnect - Login</title>
+    <script th:src="@{/js/login.js}"></script>
+
+
+</head>
+<body>
+
+
+<div class="left-side">
+    <h1>Campus<br>Reconnect</h1>
+
+</div>
+
+<div class="right-side">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" th:action="@{/do-login}" method="post">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+            <p th:if="${param.error}" style="color:red;">❌ Invalid email or password</p>
+            <p th:if="${param.logout}" style="color:green;">✅ Logged out successfully</p>
+
+            <button type="submit">Login</button>
+            <p id="message"></p>
+
+            <div class="signup-section">
+                <p>Don't have an account?</p>
+                <button type="button" class="signup-btn" onclick="window.location.href='/register'">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" th:href="@{/css/login.css}">
+</body>
+</html>

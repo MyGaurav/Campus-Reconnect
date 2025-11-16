@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Match Lost & Found | Campus Reconnect</title>
+    <style>
+        body {
+            background-color: #f5f6f8;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #1877f2;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 25px auto;
+        }
+
+        .lost-post, .found-post {
+            background-color: white;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        .found-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .no-posts {
+            text-align: center;
+            color: #777;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #145db2;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h2>🔍 Match Lost & Found</h2>
+    <button class="btn" onclick="window.location='/home'">Back to Home</button>
+</div>
+
+<div class="container">
+
+    <!-- ✅ Show lost post -->
+    <div th:if="${lostPost != null}" class="lost-post">
+        <h3>Your Most Recent Lost Post:</h3>
+        <p><strong th:text="${lostPost.title}">Title</strong></p>
+        <p th:text="${lostPost.postDesc}">Description</p>
+    </div>
+
+    <div th:if="${lostPost == null}" class="no-posts">
+        <p>You have not posted any lost items yet.</p>
+    </div>
+
+    <hr>
+
+    <!-- ✅ Found Posts Section -->
+    <h3>🔍 Strong Matches</h3>
+    <div th:if="${strongMatches == null or #lists.isEmpty(strongMatches)}">
+
+    <p>No strong matches found yet.</p>
+    </div>
+
+    <div th:each="match : ${strongMatches}"
+         style="border:2px solid #4CAF50; border-radius:10px; background-color:#E8F5E9; padding:10px; margin-bottom:10px;">
+        <b th:text="${match.post.title}"></b>
+        <p th:text="${match.post.postDesc}"></p>
+        <small>Match Score: <span th:text="${match.score}"></span></small>
+    </div>
+
+    <hr/>
+
+    <h3>🕵️ Recently Found Posts</h3>
+
+    <div th:if="${otherPosts == null or #lists.isEmpty(otherPosts)}">
+        <p>No other posts found yet.</p>
+    </div>
+
+    <div th:each="match : ${otherPosts}"
+         style="border:1px solid #ccc; border-radius:10px; padding:10px; margin-bottom:10px;">
+        <b th:text="${match.post.title}"></b>
+        <p th:text="${match.post.postDesc}"></p>
+        <small>Match Score: <span th:text="${match.score}"></span></small>
+    </div>
+
+</div>
+
+
+</body>
+</html>
